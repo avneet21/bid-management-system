@@ -1,0 +1,98 @@
+<div ng-controller="HeaderCtrl">
+    <div class="navbar navbar-default navbar-fixed-top" ng-class="{'about-header':isAboutUs(),'secured-header':isAuthenticated(),'public':!isAuthenticated()}"
+         ng-if="!isAdmin()">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">
+                    <img src="/img/logo-symbol-64x64.png" class="navbar-logo">
+                    <span class="navbar-brand-label">Usarbook</span>
+                </a>
+                <button class="navbar-toggle btn navbar-btn" ng-init="menuCollapsed = true"
+                        ng-click="menuCollapsed = !menuCollapsed">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" collapse="menuCollapsed" ng-click="menuCollapsed = true">
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-if="!isAuthenticated()">
+                        <a href="/login">
+                            <button class="btn btn-primary">Sign In</button>
+                        </a>
+                    </li>
+                    <li ng-if="!isAuthenticated()">
+                        <a href="/signup">
+                            <button class="btn btn-primary">Sign Up</button>
+                        </a>
+                    </li>
+                    <li ng-if="isAuthenticated()">
+                        <a href="" ng-click="logout()">
+                            <button class="btn btn-transparent">Sign Out</button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-inverse navbar-fixed-top secured-header" ng-if="isAdmin()" ng-controller="AdminHeaderCtrl">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/admin/" class="navbar-brand-admin">
+                    <img src="/img/logo-symbol-64x64.png" class="navbar-logo">
+                    <span class="navbar-brand-label">Usarbook</span>
+                </a>
+                <button class="navbar-toggle btn navbar-btn" ng-click="toggleAdminMenu()">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" collapse="adminMenuCollapsed">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown" dropdown is-open="status.isopen">
+                        <a href="#" class="dropdown-toggle navbar-dropdown-admin" dropdown-toggle>System&nbsp;<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Pivoted Settings</li>
+                            <li><a href="/admin/statuses" ng-click="closeAdminMenu()">Statuses</a></li>
+                            <li><a href="/admin/categories" ng-click="closeAdminMenu()">Categories</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">User Admin</li>
+                            <li><a href="/admin/users" ng-click="closeAdminMenu()">Users</a></li>
+                            <li><a href="/admin/accounts" ng-click="closeAdminMenu()">Accounts</a></li>
+                            <li><a href="/admin/administrators" ng-click="closeAdminMenu()">Administrators</a></li>
+                            <li><a href="/admin/admin-groups" ng-click="closeAdminMenu()">Admin Groups</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form name="form" class="navbar-form navbar-right">
+                    <div class="dropdown" dropdown is-open="resultIsOpen">
+                        <input name="search" type="text" placeholder="search" class="form-control" ng-model="query"
+                               ng-model-options="{ debounce: 500 }" ng-change="update()">
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header" ng-show="showDropdownHeader('noDocsMatched')">no docs matched
+                            </li>
+                            <li class="dropdown-header" ng-show="showDropdownHeader('Users')">Users</li>
+                            <li ng-repeat="user in result.users">
+                                <a ng-bind="user.username" ng-href="/admin/users/{{user._id}}"
+                                   ng-click="closeAdminMenu()"></a>
+                            </li>
+                            <li class="dropdown-header" ng-show="showDropdownHeader('Accounts')">Accounts</li>
+                            <li ng-repeat="account in result.accounts">
+                                <a ng-bind="account.name.full" ng-href="/admin/accounts/{{account._id}}"
+                                   ng-click="closeAdminMenu()"></a>
+                            </li>
+                            <li class="dropdown-header" ng-show="showDropdownHeader('Administrators')">Administrators
+                            </li>
+                            <li ng-repeat="admin in result.administrators">
+                                <a ng-bind="admin.name.full" ng-href="/admin/administrators/{{admin._id}}"
+                                   ng-click="closeAdminMenu()"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

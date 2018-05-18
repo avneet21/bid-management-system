@@ -1,0 +1,67 @@
+.box-bg {
+  background-color: #fff;
+  text-align: center;
+  background-image: url('/img/bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  .box-content{
+    font-weight: 300;
+    box-sizing: border-box;
+    text-align: center;
+    align-self: center;
+    background: rgba(255,255,255,0.7);
+    padding: 30px 40px;
+    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#E6FFFFFF', endColorstr='#E6FFFFFF');
+    z-index: 999999999;
+    -webkit-box-shadow: 0 6px 6px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 6px 6px rgba(0,0,0,0.3);
+    box-shadow: 0 6px 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    overflow: hidden;
+    zoom: 1;
+    width: 500px;
+    .tagline{
+      font-size: 35px;
+      font-weight: 400;
+      color: #000;
+      margin-bottom: 5px;
+      letter-spacing: 4px;
+    }
+    .sub-tagline{
+      font-size: 18px;
+      line-height: 35px;
+      color: #000;
+      letter-spacing: 4px;
+    }
+    .btn-sign-up{
+      width:150px;
+      margin-top: 20px;
+    }
+  }
+  h1 {
+    font-weight: bold;
+  }
+
+  @media (max-width: $screen-tablet) {
+    h1 {
+      font-size: ($font-size-base * 3.5);
+    }
+  }
+  @media (min-width: $screen-tablet) {
+    h1 {
+      font-size: ($font-size-base * 7.5);
+    }
+  }
+}
+
+.panel h3 {
+  margin-top: 0;
+}

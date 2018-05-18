@@ -1,0 +1,92 @@
+.navbar {
+  @include box-shadow(0, 2px, 5px, rgba(0, 0, 0, 0.125));
+
+  .navbar-brand {
+    font-weight: bold;
+    color: #003d5f;
+    position: relative;
+    display: inline-block;
+
+    .navbar-logo {
+      position: absolute;
+      top: 10px;
+      height: 32px;
+      width: 32px;
+    }
+    .navbar-brand-label{
+      color:#fff;
+    }
+  }
+
+  .navbar-brand-admin {
+    @extend .navbar-brand;
+    color: #eee;
+  }
+
+  .navbar-dropdown-admin {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  //overwrite boostrap class
+  .dropdown-header {
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-left: 12px;
+  }
+
+  .navbar-brand-label {
+    margin-left: 35px;
+  }
+
+  .nav {
+    li {
+      &.dropdown{
+        a{
+          padding:15px;
+        }
+      }
+      a {
+        padding: 10px 5px;
+      }
+    }
+  }
+}
+
+.navbar-default {
+  &.public {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    background-repeat: no-repeat;
+    background-image: none;
+    &.about-header {
+      background-color: #263238;
+    }
+    .navbar-header {
+      margin-top: 8px;
+    }
+  }
+}
+
+.secured-header {
+  background-color: #263238;
+  border-color: transparent;
+  box-shadow: none;
+  background-repeat: no-repeat;
+  background-image: none;
+}
+
+.navbar-brand, .navbar .navbar-brand-admin, .navbar-nav > li > a {
+  text-shadow: none;
+  color: #fff;
+}
+
+.navbar .navbar-brand, .navbar .navbar-brand-admin {
+  color: #fff;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+  font-weight: 400;
+}

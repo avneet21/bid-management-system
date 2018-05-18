@@ -1,0 +1,27 @@
+.footer {
+  color: #fff;
+  background: #202020;
+  .container {
+    padding: 20px 5px 20px 5px;
+  }
+  a, a:visited {
+    color: #fff;
+    text-decoration: none;
+  }
+  .links {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    li {
+      display: inline-block;
+      padding-right: 10px;
+      margin-right: 10px;
+      list-style: none;
+    }
+    li:last-child {
+      padding-right: 0;
+      margin-right: 0;
+      border: none;
+    }
+  }
+}
