@@ -5,7 +5,7 @@
             <div class="navbar-header">
                 <a href="/" class="navbar-brand">
                     <img src="/img/logo-symbol-64x64.png" class="navbar-logo">
-                    <span class="navbar-brand-label">Usarbook</span>
+                    <span class="navbar-brand-label">Bid Management</span>
                 </a>
                 <button class="navbar-toggle btn navbar-btn" ng-init="menuCollapsed = true"
                         ng-click="menuCollapsed = !menuCollapsed">
@@ -21,11 +21,7 @@
                             <button class="btn btn-primary">Sign In</button>
                         </a>
                     </li>
-                    <li ng-if="!isAuthenticated()">
-                        <a href="/signup">
-                            <button class="btn btn-primary">Sign Up</button>
-                        </a>
-                    </li>
+                
                     <li ng-if="isAuthenticated()">
                         <a href="" ng-click="logout()">
                             <button class="btn btn-transparent">Sign Out</button>
@@ -40,7 +36,7 @@
             <div class="navbar-header">
                 <a href="/admin/" class="navbar-brand-admin">
                     <img src="/img/logo-symbol-64x64.png" class="navbar-logo">
-                    <span class="navbar-brand-label">Usarbook</span>
+                    <span class="navbar-brand-label">Bid Management</span>
                 </a>
                 <button class="navbar-toggle btn navbar-btn" ng-click="toggleAdminMenu()">
                     <span class="icon-bar"></span>
@@ -49,23 +45,17 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse" collapse="adminMenuCollapsed">
-                <ul class="nav navbar-nav">
+                <!-- <ul class="nav navbar-nav">
                     <li class="dropdown" dropdown is-open="status.isopen">
-                        <a href="#" class="dropdown-toggle navbar-dropdown-admin" dropdown-toggle>System&nbsp;<span
+                        <a href="#" class="dropdown-toggle navbar-dropdown-admin" dropdown-toggle>Admin Functions&nbsp;<span
                                 class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li class="dropdown-header">Pivoted Settings</li>
-                            <li><a href="/admin/statuses" ng-click="closeAdminMenu()">Statuses</a></li>
-                            <li><a href="/admin/categories" ng-click="closeAdminMenu()">Categories</a></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header">User Admin</li>
-                            <li><a href="/admin/users" ng-click="closeAdminMenu()">Users</a></li>
-                            <li><a href="/admin/accounts" ng-click="closeAdminMenu()">Accounts</a></li>
+                            <li><a href="/admin/statuses" ng-click="closeAdminMenu()">Bids</a></li>
+                            <li><a href="/admin/users" ng-click="closeAdminMenu()">Bidders</a></li>
                             <li><a href="/admin/administrators" ng-click="closeAdminMenu()">Administrators</a></li>
-                            <li><a href="/admin/admin-groups" ng-click="closeAdminMenu()">Admin Groups</a></li>
                         </ul>
                     </li>
-                </ul>
+                </ul> -->
                 <form name="form" class="navbar-form navbar-right">
                     <div class="dropdown" dropdown is-open="resultIsOpen">
                         <input name="search" type="text" placeholder="search" class="form-control" ng-model="query"

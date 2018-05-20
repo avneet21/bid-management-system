@@ -85,10 +85,12 @@ angular.module('admin.statuses.index').controller('StatusesIndexCtrl', ['$scope'
     // $scope vars
     //select elements and their associating options
     $scope.sorts = [
-      {label: "id \u25B2", value: "_id"},
-      {label: "id \u25BC", value: "-_id"},
-      {label: "name \u25B2", value: "name"},
-      {label: "name \u25BC", value: "-name"}
+      {label: "Id \u25B2", value: "_id"},
+      {label: "Id \u25BC", value: "-_id"},
+      {label: "Amount \u25B2", value: "amount"},
+      {label: "Amount \u25BC", value: "-amount"},
+      {label: "Bid Date \u25B2", value: "createdOn"},
+      {label: "Bid Date \u25BC", value: "-createdOn"}
     ];
     $scope.limits = [
       {label: "10 items", value: 10},
@@ -99,5 +101,16 @@ angular.module('admin.statuses.index').controller('StatusesIndexCtrl', ['$scope'
 
     //initialize $scope variables
     deserializeData(data);
+    $scope.statuses = [];
+    for(var i=0;i<20;i++){
+      $scope.statuses.push({
+        id  : 100000+i,
+        title : "My Bid For Project "+i,
+        description : "This bid is related to We Development project",
+        createdOn : "19th May 2018",
+        amount : (300+50*i) + " USD",
+        createdBy : "Admin User"
+      })
+    }
   }
 ]);

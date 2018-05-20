@@ -3,21 +3,22 @@
         <div class="page-header">
             <form class="form-inline pull-right" name="addStatusForm">
                 <div class="input-group">
-                    <input name="pivot" type="text" placeholder="pivot" class="form-control" ng-model="add.pivot" required>
-                    <input name="name" type="text" placeholder="name" class="form-control" ng-model="add.name" required>
+                    <input name="title" type="text" placeholder="Bid Title" class="form-control" ng-model="add.title" required>
+                    <input name="amount" type="number" placeholder="Bid Amount" class="form-control" ng-model="add.amount" required>
+                    <input name="description" type="text" placeholder="Bid Description" class="form-control" ng-model="add.title" required>
                     <button type="button" class="btn btn-primary" ng-disabled="!canSave(addStatusForm)" ng-click="addStatus()">Add New</button>
                 </div>
             </form>
-            <h1>Statuses</h1>
+            <h1>Your Bids</h1>
         </div>
         <form class="filters">
             <div class="row">
                 <div class="col-sm-3">
-                    <label>Pivot Search</label>
+                    <label>Bid Title</label>
                     <input name="pivot" type="text" class="form-control" ng-model="filters.pivot" ng-model-options="{ debounce: 500 }" ng-change="filtersUpdated()">
                 </div>
                 <div class="col-sm-3">
-                    <label>Name Search</label>
+                    <label>Bid Amount</label>
                     <input name="name" type="text" class="form-control" ng-model="filters.name" ng-model-options="{ debounce: 500 }" ng-change="filtersUpdated()">
                 </div>
                 <div class="col-sm-3">
@@ -43,21 +44,29 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th></th>
-                <th>pivot</th>
-                <th class="stretch">name</th>
-                <th>id</th>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Bid Amount</th>
+                <!-- <th>Bid User</th> -->
+                <th>Description</th>
+                <th>Bid Date</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="status in statuses">
+                    <td ng-bind="status.id"></td>
+                    <td ng-bind="status.title"></td>
+                    <td ng-bind="status.amount"></td>
+                    <!-- <td ng-bind="status.createdBy"></td> -->
+                    <td ng-bind="status.description"></td>
+                    <td ng-bind="status.createdOn"></td>
+                    
                 <td><a class="btn btn-default btn-sm" ng-href="/admin/statuses/{{status._id}}">Edit</a></td>
-                <td ng-bind="status.pivot"></td>
-                <td ng-bind="status.name"></td>
-                <td class="nowrap" ng-bind="status._id"></td>
+                
             </tr>
             <tr ng-show="statuses.length === 0">
-                <td colspan="4">no documents matched</td>
+                <td colspan=7">No Bids matched</td>
             </tr>
             </tbody>
         </table>

@@ -3,11 +3,11 @@
 exports.hostname = process.env.hostname || 'localhost';
 exports.port = process.env.PORT || 3000;
 exports.mongodb = {
-  uri: process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/sample-app'
+  uri: process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/sample-app'
 };
 exports.companyName = 'Sample';
 exports.projectName = 'User Management App';
-exports.systemEmail = 'r@r.com';
+exports.systemEmail = 'test@test.com';
 exports.cryptoKey = 'abcxaflfwdqsa';
 exports.loginAttempts = {
   forIp: 50,
@@ -18,7 +18,7 @@ exports.requireAccountVerification = false;
 exports.smtp = {
   from: {
     name: process.env.SMTP_FROM_NAME || exports.projectName +' Website',
-    address: process.env.SMTP_FROM_ADDRESS || 'r@r.com'
+    address: process.env.SMTP_FROM_ADDRESS || 'test@test.com'
   },
   credentials: {
     user: process.env.SMTP_USERNAME || '',
