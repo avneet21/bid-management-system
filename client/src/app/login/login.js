@@ -24,8 +24,14 @@ angular.module('login.index').controller('LoginCtrl', [ '$scope', '$location', '
     var loginSuccess = function(data){
       if(data.success){
         //account/user created, redirect...
+          console.log(data);
         var url = data.defaultReturnUrl || '/';
-        return $location.path(url);
+        if(data.user.admin){
+            return $location.path("/admin");
+        } else {
+            return $location.path("/account");
+        }
+
       }else{
         //error due to server side validation
         $scope.errfor = data.errfor;

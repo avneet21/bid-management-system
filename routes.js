@@ -85,7 +85,11 @@ exports = module.exports = function(app, passport) {
   app.get('/api/account/settings/google/disconnect', account.disconnectGoogle);
   app.get('/api/account/settings/facebook/callback', account.connectFacebook);
   app.get('/api/account/settings/facebook/disconnect', account.disconnectFacebook);
-
+    app.get('/api/admin/statuses', adminStatus.find);
+    app.post('/api/admin/statuses', adminStatus.create);
+    app.get('/api/admin/statuses/:id', adminStatus.read);
+    app.put('/api/admin/statuses/:id', adminStatus.update);
+    app.delete('/api/admin/statuses/:id', adminStatus.delete);
   //-----athorization required api-----
   app.all('/api/admin*', apiEnsureAuthenticated);
   app.all('/api/admin*', apiEnsureAdmin);
@@ -134,11 +138,8 @@ exports = module.exports = function(app, passport) {
   app.delete('/api/admin/accounts/:id', adminAccount.delete);
 
   //admin > statuses
-  app.get('/api/admin/statuses', adminStatus.find);
-  app.post('/api/admin/statuses', adminStatus.create);
-  app.get('/api/admin/statuses/:id', adminStatus.read);
-  app.put('/api/admin/statuses/:id', adminStatus.update);
-  app.delete('/api/admin/statuses/:id', adminStatus.delete);
+
+
 
   //admin > categories
   app.get('/api/admin/categories', adminCategory.find);

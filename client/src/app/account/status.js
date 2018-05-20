@@ -1,9 +1,9 @@
-angular.module('admin.statuses.detail', ['ngRoute', 'security.authorization', 'services.utility', 'services.adminResource', 'ui.bootstrap']);
-angular.module('admin.statuses.detail').config(['$routeProvider', function($routeProvider){
+angular.module('account.statuses.detail', ['ngRoute', 'security.authorization', 'services.utility', 'services.adminResource', 'ui.bootstrap']);
+angular.module('account.statuses.detail').config(['$routeProvider', function($routeProvider){
   $routeProvider
-    .when('/admin/statuses/:id', {
-      templateUrl: 'admin/statuses/admin-status.tpl.html',
-      controller: 'AdminStatusesDetailCtrl',
+    .when('/status/:id', {
+      templateUrl: 'account/status.tpl.html',
+      controller: 'AccountStatusesDetailCtrl',
       title: 'Statuses / Details',
       resolve: {
         status: ['$q', '$route', '$location', 'securityAuthorization', 'adminResource', function($q, $route, $location, securityAuthorization, adminResource){
@@ -24,16 +24,20 @@ angular.module('admin.statuses.detail').config(['$routeProvider', function($rout
               return $q.reject();
             })
             .catch(function(){
-              redirectUrl = redirectUrl || '/account';
-              $location.path(redirectUrl);
-              return $q.reject();
+                var id = $route.current.params.id || '';
+                if(id){
+                    return adminResource.findStatus(id);
+                } else{
+                    redirectUrl = '/account';
+                    return $q.reject();
+                }
             });
           return promise;
         }]
       }
     });
 }]);
-angular.module('admin.statuses.detail').controller('AdminStatusesDetailCtrl', ['$scope', '$route', '$location', '$log', 'utility', 'adminResource', 'status',
+angular.module('account.statuses.detail').controller('AccountStatusesDetailCtrl', ['$scope', '$route', '$location', '$log', 'utility', 'adminResource', 'status',
   function($scope, $route, $location, $log, utility, adminResource, data) {
     // local vars
     var deserializeData = function(data){
@@ -81,7 +85,7 @@ angular.module('admin.statuses.detail').controller('AdminStatusesDetailCtrl', ['
         adminResource.deleteStatus($scope.status._id).then(function(result){
           if(result.success){
             //redirect to admin statuses index page
-            $location.path('/admin/statuses');
+            $location.path('/account');
           }else{
             //error due to server side validation
             angular.forEach(result.errors, function(err, index){

@@ -5,7 +5,7 @@
                 <div class="input-group">
                     <input name="title" type="text" placeholder="Bid Title" class="form-control" ng-model="add.title" required>
                     <input name="amount" type="number" placeholder="Bid Amount" class="form-control" ng-model="add.amount" required>
-                    <input name="description" type="text" placeholder="Bid Description" class="form-control" ng-model="add.title" required>
+                    <input name="description" type="text" placeholder="Bid Description" class="form-control" ng-model="add.description" required>
                     <button type="button" class="btn btn-primary" ng-disabled="!canSave(addStatusForm)" ng-click="addStatus()">Add New</button>
                 </div>
             </form>
@@ -15,11 +15,11 @@
             <div class="row">
                 <div class="col-sm-3">
                     <label>Bid Title</label>
-                    <input name="pivot" type="text" class="form-control" ng-model="filters.pivot" ng-model-options="{ debounce: 500 }" ng-change="filtersUpdated()">
+                    <input name="title" type="text" class="form-control" ng-model="filters.title" ng-model-options="{ debounce: 500 }" ng-change="filtersUpdated()">
                 </div>
                 <div class="col-sm-3">
                     <label>Bid Amount</label>
-                    <input name="name" type="text" class="form-control" ng-model="filters.name" ng-model-options="{ debounce: 500 }" ng-change="filtersUpdated()">
+                    <input name="amount" type="text" class="form-control" ng-model="filters.amount" ng-model-options="{ debounce: 500 }" ng-change="filtersUpdated()">
                 </div>
                 <div class="col-sm-3">
                     <label>Sort By</label>
@@ -47,7 +47,7 @@
                 <th>Id</th>
                 <th>Title</th>
                 <th>Bid Amount</th>
-                <!-- <th>Bid User</th> -->
+                <th>Bidder</th>
                 <th>Description</th>
                 <th>Bid Date</th>
                 <th>Action</th>
@@ -55,10 +55,10 @@
             </thead>
             <tbody>
             <tr ng-repeat="status in statuses">
-                    <td ng-bind="status.id"></td>
+                    <td ng-bind="status._id"></td>
                     <td ng-bind="status.title"></td>
                     <td ng-bind="status.amount"></td>
-                    <!-- <td ng-bind="status.createdBy"></td> -->
+                    <td ng-bind="status.createdBy"></td>
                     <td ng-bind="status.description"></td>
                     <td ng-bind="status.createdOn"></td>
                     

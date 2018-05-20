@@ -4,6 +4,11 @@ var status = {
   find: function(req, res, next){
     req.query.pivot = req.query.pivot ? req.query.pivot : '';
     req.query.name = req.query.name ? req.query.name : '';
+      req.query.title = req.query.title ? req.query.title : '';
+      req.query.description = req.query.description ? req.query.description : '';
+      req.query.amount = req.query.amount ? req.query.amount : '';
+      req.query.createdOn = req.query.createdOn ? req.query.createdOn : '';
+      req.query.createdBy = req.query.createdBy ? req.query.createdBy : '';
     req.query.limit = req.query.limit ? parseInt(req.query.limit, null) : 20;
     req.query.page = req.query.page ? parseInt(req.query.page, null) : 1;
     req.query.sort = req.query.sort ? req.query.sort : '_id';
@@ -16,10 +21,26 @@ var status = {
     if (req.query.name) {
       filters.name = new RegExp('^.*?'+ req.query.name +'.*$', 'i');
     }
+      if (req.query.title) {
+          filters.title = new RegExp('^.*?'+ req.query.title +'.*$', 'i');
+      }
+      if (req.query.description) {
+          filters.description = new RegExp('^.*?'+ req.query.description +'.*$', 'i');
+      }
+
+      if (req.query.createdOn) {
+          filters.createdOn = new RegExp('^.*?'+ req.query.createdOn +'.*$', 'i');
+      }
+      if(!req.user.isAdmin){
+          filters.createdBy = req.user.username;
+      }
+      if (req.query.amount) {
+          filters.amount = new RegExp('^.*?'+ req.query.amount +'.*$', 'i');
+      }
 
     req.app.db.models.Status.pagedFind({
       filters: filters,
-      keys: 'pivot name',
+      keys: 'pivot name title description amount createdOn createdBy',
       limit: req.query.limit,
       page: req.query.page,
       sort: req.query.sort
@@ -45,46 +66,14 @@ var status = {
   create: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
 
-    workflow.on('validate', function() {
-      if (!req.user.roles.admin.isMemberOf('root')) {
-        workflow.outcome.errors.push('You may not create statuses.');
-        return workflow.emit('response');
-      }
 
-      if (!req.body.pivot) {
-        workflow.outcome.errors.push('A pivot is required.');
-        return workflow.emit('response');
-      }
-
-      if (!req.body.name) {
-        workflow.outcome.errors.push('A name is required.');
-        return workflow.emit('response');
-      }
-
-      workflow.emit('duplicateStatusCheck');
-    });
-
-    workflow.on('duplicateStatusCheck', function() {
-      req.app.db.models.Status.findById(req.app.utility.slugify(req.body.pivot +' '+ req.body.name)).exec(function(err, status) {
-        if (err) {
-          return workflow.emit('exception', err);
-        }
-
-        if (status) {
-          workflow.outcome.errors.push('That status+pivot is already taken.');
-          return workflow.emit('response');
-        }
-
-        workflow.emit('createStatus');
-      });
-    });
 
     workflow.on('createStatus', function() {
-      var fieldsToSet = {
-        _id: req.app.utility.slugify(req.body.pivot +' '+ req.body.name),
-        pivot: req.body.pivot,
-        name: req.body.name
-      };
+      var fieldsToSet = Object.assign({
+          _id : Math.random(),
+          createdOn : new Date(),
+          createdBy : req.user.username
+      },req.body)
 
       req.app.db.models.Status.create(fieldsToSet, function(err, status) {
         if (err) {
@@ -96,51 +85,17 @@ var status = {
       });
     });
 
-    workflow.emit('validate');
+    workflow.emit('createStatus');
   },
 
   update: function(req, res, next){
     var workflow = req.app.utility.workflow(req, res);
 
-    workflow.on('validate', function() {
-      if (!req.user.roles.admin.isMemberOf('root')) {
-        workflow.outcome.errors.push('You may not update statuses.');
-        return workflow.emit('response');
-      }
 
-      if (!req.body.pivot) {
-        workflow.outcome.errfor.pivot = 'required';
-        return workflow.emit('response');
-      }
-
-      if (!req.body.name) {
-        workflow.outcome.errfor.name = 'required';
-        return workflow.emit('response');
-      }
-
-      workflow.emit('duplicateStatusCheck');
-    });
-
-    workflow.on('duplicateStatusCheck', function() {
-      req.app.db.models.Status.findById(req.app.utility.slugify(req.body.pivot +' '+ req.body.name)).exec(function(err, status) {
-        if (err) {
-          return workflow.emit('exception', err);
-        }
-
-        if (status && status._id !== req.params.id ) {
-          workflow.outcome.errors.push('That status+pivot is already taken.');
-          return workflow.emit('response');
-        }
-
-        workflow.emit('patchStatus');
-      });
-    });
 
     workflow.on('patchStatus', function() {
-      var fieldsToSet = {
-        pivot: req.body.pivot,
-        name: req.body.name
-      };
+      var fieldsToSet = Object.assign({
+      },req.body)
       var options = { new: true };
 
       req.app.db.models.Status.findByIdAndUpdate(req.params.id, fieldsToSet, options, function(err, status) {
@@ -153,7 +108,7 @@ var status = {
       });
     });
 
-    workflow.emit('validate');
+    workflow.emit('patchStatus');
   },
 
   delete: function(req, res, next){
@@ -161,7 +116,7 @@ var status = {
 
     workflow.on('validate', function() {
       if (!req.user.roles.admin.isMemberOf('root')) {
-        workflow.outcome.errors.push('You may not delete statuses.');
+        workflow.outcome.errors.push('You may not delete bids.');
         return workflow.emit('response');
       }
 
@@ -178,7 +133,7 @@ var status = {
       });
     });
 
-    workflow.emit('validate');
+    workflow.emit('deleteStatus');
   }
 };
 module.exports = status;

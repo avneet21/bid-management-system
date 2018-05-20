@@ -101,16 +101,16 @@ angular.module('admin.statuses.index').controller('StatusesIndexCtrl', ['$scope'
 
     //initialize $scope variables
     deserializeData(data);
-    $scope.statuses = [];
-    for(var i=0;i<20;i++){
-      $scope.statuses.push({
-        id  : 100000+i,
-        title : "My Bid For Project "+i,
-        description : "This bid is related to We Development project",
-        createdOn : "19th May 2018",
-        amount : (300+50*i) + " USD",
-        createdBy : "Admin User"
-      })
-    }
+    //$scope.statuses = [];
+    // for(var i=0;i<20;i++){
+    //   $scope.statuses.push({
+    //     id  : 100000+i,
+    //     title : "My Bid For Project "+i,
+    //     description : "This bid is related to We Development project",
+    //     createdOn : "19th May 2018",
+    //     amount : (300+50*i) + " USD",
+    //     createdBy : "Admin User"
+    //   })
+    // }
   }
 ]);

@@ -104,32 +104,32 @@
             </form>
         </div>
         <div class="col-sm-4">
-            <fieldset>
-                <div class="status-new">
-                    <legend>Status</legend>
-                    <alert ng-repeat="alert in statusAlerts" type="{{alert.type}}" close="closeStatusAlert($index)">
-                        {{alert.msg}}
-                    </alert>
-                    <div class="input-group">
-                        <select name="statusSelect" class="form-control" ng-model="selectedStatus"
-                                ng-options="status.name for status in statuses track by status._id">
-                            <option value="">-- choose --</option>
-                        </select>
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" ng-click="changeStatus()">Change</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="status-items">
-                    <div class="status" ng-repeat="status in account.statusLog | orderBy:'-_id'">
-                        <div class="pull-right badge author">{{status.userCreated.name}} -&nbsp;<span class="timeago"
-                                                                                                      ng-bind="formatTime(status.userCreated.time)"></span>
-                        </div>
-                        <div ng-bind="status.name"></div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </fieldset>
+            <!--<fieldset>-->
+                <!--<div class="status-new">-->
+                    <!--<legend>Status</legend>-->
+                    <!--<alert ng-repeat="alert in statusAlerts" type="{{alert.type}}" close="closeStatusAlert($index)">-->
+                        <!--{{alert.msg}}-->
+                    <!--</alert>-->
+                    <!--<div class="input-group">-->
+                        <!--<select name="statusSelect" class="form-control" ng-model="selectedStatus"-->
+                                <!--ng-options="status.name for status in statuses track by status._id">-->
+                            <!--<option value="">&#45;&#45; choose &#45;&#45;</option>-->
+                        <!--</select>-->
+                        <!--<div class="input-group-btn">-->
+                            <!--<button class="btn btn-default" ng-click="changeStatus()">Change</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="status-items">-->
+                    <!--<div class="status" ng-repeat="status in account.statusLog | orderBy:'-_id'">-->
+                        <!--<div class="pull-right badge author">{{status.userCreated.name}} -&nbsp;<span class="timeago"-->
+                                                                                                      <!--ng-bind="formatTime(status.userCreated.time)"></span>-->
+                        <!--</div>-->
+                        <!--<div ng-bind="status.name"></div>-->
+                        <!--<div class="clearfix"></div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</fieldset>-->
             <fieldset>
                 <div class="notes-new">
                     <legend>Notes</legend>
