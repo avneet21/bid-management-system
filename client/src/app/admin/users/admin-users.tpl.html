@@ -4,6 +4,7 @@
             <form class="form-inline pull-right" name="addUserForm">
                 <div class="input-group">
                     <input name="username" type="text" placeholder="enter a username" class="form-control" ng-model="username" required>
+                    <input name="email" type="email" placeholder="enter a email" class="form-control" ng-model="email" required>
                     <button type="button" class="btn btn-primary" ng-disabled="!canSave(addUserForm)" ng-click="addUser()">Add New</button>
                 </div>
             </form>
@@ -14,7 +15,9 @@
                 <div class="col-sm-4">
                     <label>Username Search</label>
                     <input name="username" type="text" class="form-control" ng-model="filters.username" ng-model-options="{ debounce: 500 }" ng-change="filtersUpdated()">
+
                 </div>
+
                 <!--<div class="col-sm-3">-->
                     <!--<label>Can Play Role</label>-->
                     <!--<select name="roles" class="form-control" ng-model="filters.roles" ng-model-options="{ debounce: 500 }" ng-options="role.value as role.label for role in roles"  ng-change="filtersUpdated()">-->

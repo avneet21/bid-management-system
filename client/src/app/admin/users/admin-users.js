@@ -13,7 +13,7 @@ angular.module('admin.users.index').config(['$routeProvider', function($routePro
             .then(function(){
               //handles url with query(search) parameter
               return adminResource.findUsers(Object.assign({
-                  roles : "account"
+                 // roles : "account"
               },$location.search()));
             }, function(reason){
               //rejected either user is un-authorized or un-authenticated
@@ -69,8 +69,9 @@ angular.module('admin.users.index').controller('UsersIndexCtrl', ['$scope', '$ro
       fetchUsers();
     };
     $scope.addUser = function(){
-      adminResource.addUser($scope.username).then(function(data){
+      adminResource.addUser($scope.username,$scope.email).then(function(data){
         $scope.username = '';
+          $scope.email = '';
         if(data.success){
           $route.reload();
         }else if (data.errors && data.errors.length > 0){

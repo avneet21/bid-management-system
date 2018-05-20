@@ -34,8 +34,8 @@ angular.module('services.adminResource', []).factory('adminResource', ['$http', 
     }
     return $http.get(userUrl, { params: filters }).then(processResponse, processError);
   };
-  resource.addUser = function(username){
-    return $http.post(userUrl, { username: username }).then(processResponse, processResponse);
+  resource.addUser = function(username,email){
+    return $http.post(userUrl, { username: username,email : email }).then(processResponse, processResponse);
   };
   resource.findUser = function(_id){
     var url = userUrl + '/' + _id;

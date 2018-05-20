@@ -47,64 +47,6 @@
                 <span class="help-block" ng-if="!(administrator.user && administrator.user.name)" ng-show="showError(loginForm.newUsername, 'required')">This field is required</span>
             </div>
         </fieldset></form>
-        <form name="groupForm"><fieldset>
-            <legend>Groups</legend>
-            <alert ng-repeat="alert in groupAlerts" type="{{alert.type}}" close="closeGroupAlert($index)">{{alert.msg}}</alert>
-            <div class="form-group">
-                <label class="control-label">Add Membership:</label>
-                <div class="input-group">
-                    <select name="newMembership" class="form-control" ng-options="group as group.name for group in groups" ng-model="selectedNewGroup"></select>
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-success" ng-click="addGroup()">Add</button>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Memberships:</label>
-                <div class="groups">
-                    <div class="input-group" ng-repeat="group in administrator.groups">
-                        <input disabled class="form-control" ng-model="group.name">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-danger btn-delete" ng-click="deleteGroup($index)"><i class="fa fa-trash-o fa-inverse"></i></button>
-                        </div>
-                    </div>
-                    <span class="badge" ng-show="administrator.groups.length === 0">no memberships defined</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <button type="button" class="btn btn-primary" ng-click="saveGroups()">Save Groups</button>
-            </div>
-        </fieldset></form>
-        <form name="permissionForm"><fieldset>
-            <legend>Permissions</legend>
-            <alert ng-repeat="alert in permissionAlerts" type="{{alert.type}}" close="closePermissionAlert($index)">{{alert.msg}}</alert>
-            <div class="form-group">
-                <label class="control-label">New Setting:</label>
-                <div class="input-group">
-                    <input name="permission" type="text" placeholder="enter a name" class="form-control" ng-model="newPermission">
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-success" ng-click="addPermission()">Add</button>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Settings:</label>
-                <div class="permissions">
-                    <div class="input-group" ng-repeat="permission in administrator.permissions">
-                        <input disabled ng-model="permission.name" class="form-control" disabled>
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-class="{disabled: permission.permit}" ng-click="togglePermission($index)">Allow</button>
-                            <button type="button" class="btn btn-default" ng-class="{disabled: !permission.permit}" ng-click="togglePermission($index)">Deny</button>
-                            <button type="button" class="btn btn-danger btn-delete" ng-click="deletePermission($index)"><i class="fa fa-trash-o fa-inverse"></i></button>
-                        </div>
-                    </div>
-                    <span class="badge" ng-show="administrator.permissions.length === 0">no permissions defined</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <button type="button" class="btn btn-primary" ng-click="saveSettings()">Save Settings</button>
-            </div>
-        </fieldset></form>
         <form name="deleteForm"><fieldset>
             <legend>Danger Zone</legend>
             <alert ng-repeat="alert in deleteAlerts" type="{{alert.type}}" close="closeDeleteAlert($index)">{{alert.msg}}</alert>

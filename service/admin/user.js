@@ -77,6 +77,7 @@ var user = {
     workflow.on('createUser', function () {
       var fieldsToSet = {
         username: req.body.username,
+          email: req.body.email,
         search: [
           req.body.username
         ]

@@ -3,7 +3,7 @@
          ng-if="!isAdmin()">
         <div class="container">
             <div class="navbar-header">
-                <a href="/" class="navbar-brand">
+                <a href="{{!isAdmin()?'/account':'/admin'}}" class="navbar-brand">
                     <img src="/img/logo-symbol-64x64.png" class="navbar-logo">
                     <span class="navbar-brand-label">Bid Management</span>
                 </a>
@@ -34,7 +34,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top secured-header" ng-if="isAdmin()" ng-controller="AdminHeaderCtrl">
         <div class="container">
             <div class="navbar-header">
-                <a href="/admin/" class="navbar-brand-admin">
+                <a href="{{!isAdmin()?'/account':'/admin'}}" class="navbar-brand-admin">
                     <img src="/img/logo-symbol-64x64.png" class="navbar-logo">
                     <span class="navbar-brand-label">Bid Management</span>
                 </a>
@@ -57,32 +57,7 @@
                         </ul>
                     </li>
                 </ul>
-                <form name="form" class="navbar-form navbar-right">
-                    <div class="dropdown" dropdown is-open="resultIsOpen">
-                        <input name="search" type="text" placeholder="search" class="form-control" ng-model="query"
-                               ng-model-options="{ debounce: 500 }" ng-change="update()">
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-header" ng-show="showDropdownHeader('noDocsMatched')">no docs matched
-                            </li>
-                            <li class="dropdown-header" ng-show="showDropdownHeader('Users')">Users</li>
-                            <li ng-repeat="user in result.users">
-                                <a ng-bind="user.username" ng-href="/admin/users/{{user._id}}"
-                                   ng-click="closeAdminMenu()"></a>
-                            </li>
-                            <li class="dropdown-header" ng-show="showDropdownHeader('Accounts')">Accounts</li>
-                            <li ng-repeat="account in result.accounts">
-                                <a ng-bind="account.name.full" ng-href="/admin/accounts/{{account._id}}"
-                                   ng-click="closeAdminMenu()"></a>
-                            </li>
-                            <li class="dropdown-header" ng-show="showDropdownHeader('Administrators')">Administrators
-                            </li>
-                            <li ng-repeat="admin in result.administrators">
-                                <a ng-bind="admin.name.full" ng-href="/admin/administrators/{{admin._id}}"
-                                   ng-click="closeAdminMenu()"></a>
-                            </li>
-                        </ul>
-                    </div>
-                </form>
+
             </div>
         </div>
     </div>

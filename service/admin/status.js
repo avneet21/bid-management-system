@@ -31,7 +31,7 @@ var status = {
       if (req.query.createdOn) {
           filters.createdOn = new RegExp('^.*?'+ req.query.createdOn +'.*$', 'i');
       }
-      if(!req.user.isAdmin){
+      if(!req.user.roles.admin){
           filters.createdBy = req.user.username;
       }
       if (req.query.amount) {
