@@ -12,7 +12,9 @@ angular.module('admin.users.index').config(['$routeProvider', function($routePro
           var promise = securityAuthorization.requireAdminUser()
             .then(function(){
               //handles url with query(search) parameter
-              return adminResource.findUsers($location.search());
+              return adminResource.findUsers(Object.assign({
+                  roles : "account"
+              },$location.search()));
             }, function(reason){
               //rejected either user is un-authorized or un-authenticated
               redirectUrl = reason === 'unauthorized-client'? '/account': '/login';
@@ -84,7 +86,7 @@ angular.module('admin.users.index').controller('UsersIndexCtrl', ['$scope', '$ro
 
     // $scope vars
     //select elements and their associating options
-    $scope.roles = [{label: "any", value: ""}, {label: "admin", value: "admin"}, {label: "account", value: "account"}];
+    $scope.roles = [{label: "any", value: ""}, {label: "admin", value: "admin"}];
     $scope.isActives =[{label: "either", value: ""}, {label: "yes", value: "yes"}, {label: "no", value: "no"}];
     $scope.sorts = [
       {label: "id \u25B2", value: "_id"},

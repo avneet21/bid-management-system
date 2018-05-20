@@ -2,24 +2,30 @@
     <div class="col-sm-12">
         <div class="page-header"><h1>Admin Area</h1></div>
         <div class="row">
-            <div class="col-sm-4">
-                <div class="well stat">
-                    <div class="stat-value">100</div>
-                    <div class="stat-label">Bidders</div>
-                </div>
+            <div class="col-sm-4" style = "cursor: pointer">
+                <a href="/admin/users">
+                    <div class="well stat">
+                        <div class="stat-value">{{user.users}}</div>
+                        <div class="stat-label">Bidders</div>
+                    </div>
+                </a>
             </div>
            
-            <div class="col-sm-4">
+            <div class="col-sm-4" style = "cursor: pointer">
+                <a href="/admin/administrators">
                 <div class="well stat">
-                    <div class="stat-value">2</div>
+                    <div class="stat-value">{{user.admins}}</div>
                     <div class="stat-label">Admins</div>
                 </div>
+                </a>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4" style = "cursor: pointer">
+                <a href="/admin/statuses">
                 <div class="well stat">
-                    <div class="stat-value">10000</div>
+                    <div class="stat-value">{{pivoted.statuses}}</div>
                     <div class="stat-label">Bids</div>
                 </div>
+                </a>
             </div>
         </div>
     

@@ -11,19 +11,19 @@
         </div>
         <form class="filters">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <label>Username Search</label>
                     <input name="username" type="text" class="form-control" ng-model="filters.username" ng-model-options="{ debounce: 500 }" ng-change="filtersUpdated()">
                 </div>
+                <!--<div class="col-sm-3">-->
+                    <!--<label>Can Play Role</label>-->
+                    <!--<select name="roles" class="form-control" ng-model="filters.roles" ng-model-options="{ debounce: 500 }" ng-options="role.value as role.label for role in roles"  ng-change="filtersUpdated()">-->
+                        <!--&lt;!&ndash;<option value="">any</option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option value="admin">admin</option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option value="account">account</option>&ndash;&gt;-->
+                    <!--</select>-->
+                <!--</div>-->
                 <div class="col-sm-3">
-                    <label>Can Play Role</label>
-                    <select name="roles" class="form-control" ng-model="filters.roles" ng-model-options="{ debounce: 500 }" ng-options="role.value as role.label for role in roles"  ng-change="filtersUpdated()">
-                        <!--<option value="">any</option>-->
-                        <!--<option value="admin">admin</option>-->
-                        <!--<option value="account">account</option>-->
-                    </select>
-                </div>
-                <div class="col-sm-2">
                     <label>Is Active</label>
                     <select name="isActive" class="form-control" ng-model="filters.isActive" ng-model-options="{ debounce: 500 }" ng-options="isActive.value as isActive.label for isActive in isActives" ng-change="filtersUpdated()">
                         <!--<option value="">either</option>-->
@@ -31,7 +31,7 @@
                         <!--<option value="no">no</option>-->
                     </select>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <label>Sort By</label>
                     <select name="sort" class="form-control" ng-model="filters.sort" ng-model-options="{ debounce: 500 }" ng-options="sort.value as sort.label for sort in sorts" ng-change="filtersUpdated()">
                         <!--<option value="_id">id &#9650;</option>-->
